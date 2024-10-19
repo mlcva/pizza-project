@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
 // components
 import Home from './pages/Home'
@@ -7,7 +8,13 @@ import Home from './pages/Home'
 import './scss/app.scss'
 import MainLayout from './layouts/MainLayout'
 
-const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'))
+// const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'))
+
+const Cart = Loadable({
+  loader: () => import(/* webpackChunkName: "Cart" */ './pages/Cart'),
+  loading: () => <div>Загрузка...</div>,
+})
+
 const NotFound = React.lazy(() => import('./pages/NotFound'))
 const FullPizza = React.lazy(() => import('./pages/FullPizza'))
 
